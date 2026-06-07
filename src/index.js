@@ -76,6 +76,24 @@ function createMcpServer() {
             return { content: [{ type: "text", text: `Failed to update routine: ${err.message}` }], isError: true };
         }
     });
+    server.tool("delete_routine", "Delete a workout routine", {
+        routine_id: z.string().describe("The ID of the routine to delete")
+    }, async (args) => {
+        try {
+            const response = await fetch(`https://api.hevyapp.com/v1/routines/${args.routine_id}`, {
+                method: "DELETE",
+                headers: {
+                    "api-key": HEVY_API_KEY
+                }
+            });
+            if (!response.ok)
+                throw new Error(`API Error: ${response.status} ${await response.text()}`);
+            return { content: [{ type: "text", text: `Successfully deleted routine with ID: ${args.routine_id}` }] };
+        }
+        catch (err) {
+            return { content: [{ type: "text", text: `Failed to delete routine: ${err.message}` }], isError: true };
+        }
+    });
     server.tool("get_recent_workouts", "Fetch the user's recent workouts.", {}, async () => {
         try {
             const response = await fetch("https://api.hevyapp.com/v1/workouts?page=1&pageSize=10", {
