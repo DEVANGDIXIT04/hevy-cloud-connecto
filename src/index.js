@@ -35,7 +35,7 @@ function createMcpServer() {
                     "api-key": HEVY_API_KEY,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ routine: { folder_id: null, ...args } })
+                body: JSON.stringify({ routine: { ...args, folder_id: args.folder_id ?? null } })
             });
             if (!response.ok)
                 throw new Error(`API Error: ${response.status} ${await response.text()}`);
