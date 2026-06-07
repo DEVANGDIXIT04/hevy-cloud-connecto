@@ -13,13 +13,14 @@ if (!HEVY_API_KEY) {
   console.warn("WARNING: No HEVY_API_KEY environment variable set in the cloud. Hevy API calls will fail until set.");
 }
 
-const server = new McpServer({
-  name: "hevy-cloud",
-  version: "1.0.0",
-});
+function createMcpServer() {
+  const server = new McpServer({
+    name: "hevy-cloud",
+    version: "1.0.0",
+  });
 
-// --- HEVY TOOLS ---
-server.tool(
+  // --- HEVY TOOLS ---
+  server.tool(
   "create_routine",
   "Create a new workout routine",
   {
@@ -122,6 +123,9 @@ server.tool(
   }
 );
 
+return server;
+}
+
 // --- EXPRESS SERVER ---
 const app = express();
 app.use(cors());
@@ -166,6 +170,7 @@ let transport: SSEServerTransport;
 app.get("/sse", requireAuth, async (req, res) => {
   console.log("New SSE connection established by Claude");
   transport = new SSEServerTransport("/messages", res);
+  const server = createMcpServer();
   await server.connect(transport);
 });
 
