@@ -106,7 +106,7 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // Required to parse JSON bodies
 // Fake OAuth Endpoints
-app.get("/mcp/start-auth", (req, res) => {
+app.get("/authorize", (req, res) => {
     const { redirect_uri, state } = req.query;
     console.log("OAuth flow started by Claude, redirecting back...");
     if (!redirect_uri) {
@@ -115,7 +115,7 @@ app.get("/mcp/start-auth", (req, res) => {
     // Redirect back to Claude with a dummy auth code
     res.redirect(`${redirect_uri}?code=dummy_code_123&state=${state}`);
 });
-app.post("/mcp/token", (req, res) => {
+app.post("/token", (req, res) => {
     console.log("Claude requested token exchange. Sending fake tokens...");
     res.json({
         access_token: "dummy_access_token_456",
