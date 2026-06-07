@@ -153,14 +153,36 @@ server.tool(
   },
   async (args) => {
     try {
-      const response = await fetch("https://api.hevyapp.com/v1/exercise_templates", {
+      // Fetch the first page to get the total page count
+      const firstResponse = await fetch("https://api.hevyapp.com/v1/exercise_templates?page=1", {
         headers: { "api-key": HEVY_API_KEY as string }
       });
-      if (!response.ok) throw new Error(`API Error: ${response.status} ${await response.text()}`);
-      const data = await response.json();
+      if (!firstResponse.ok) throw new Error(`API Error: ${firstResponse.status} ${await firstResponse.text()}`);
+      const firstData = await firstResponse.json();
+      
+      let allExercises = firstData.exercise_templates || [];
+      const totalPages = firstData.page_count || 1;
+      
+      // Fetch remaining pages
+      if (totalPages > 1) {
+        const pageRequests = [];
+        for (let i = 2; i <= totalPages; i++) {
+          pageRequests.push(
+            fetch(`https://api.hevyapp.com/v1/exercise_templates?page=${i}`, {
+              headers: { "api-key": HEVY_API_KEY as string }
+            }).then(r => r.json())
+          );
+        }
+        const pagesData = await Promise.all(pageRequests);
+        pagesData.forEach(page => {
+          if (page.exercise_templates) {
+            allExercises = allExercises.concat(page.exercise_templates);
+          }
+        });
+      }
       
       const query = args.query.toLowerCase();
-      const results = data.filter((ex: any) => ex.title.toLowerCase().includes(query));
+      const results = allExercises.filter((ex: any) => (ex.title || "").toLowerCase().includes(query));
       
       return { 
         content: [{ 
