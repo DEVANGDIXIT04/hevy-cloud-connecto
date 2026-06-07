@@ -102,6 +102,30 @@ function createMcpServer() {
             return { content: [{ type: "text", text: `Failed to get routines: ${err.message}` }], isError: true };
         }
     });
+    server.tool("search_exercises", "Search for exercise templates by name to get their IDs. Always use this to find the correct exercise_template_id before creating or updating a routine.", {
+        query: z.string().describe("The name of the exercise to search for (e.g., 'Bench Press', 'Plank')")
+    }, async (args) => {
+        try {
+            const response = await fetch("https://api.hevyapp.com/v1/exercise_templates", {
+                headers: { "api-key": HEVY_API_KEY }
+            });
+            if (!response.ok)
+                throw new Error(`API Error: ${response.status} ${await response.text()}`);
+            const data = await response.json();
+            const query = args.query.toLowerCase();
+            const results = data.filter((ex) => ex.title.toLowerCase().includes(query));
+            return {
+                content: [{
+                        type: "text",
+                        text: `Found ${results.length} exercises matching '${args.query}':\n` +
+                            results.slice(0, 15).map((ex) => `- ${ex.title} (ID: ${ex.id})`).join("\n")
+                    }]
+            };
+        }
+        catch (err) {
+            return { content: [{ type: "text", text: `Failed to search exercises: ${err.message}` }], isError: true };
+        }
+    });
     return server;
 }
 // --- EXPRESS SERVER ---
