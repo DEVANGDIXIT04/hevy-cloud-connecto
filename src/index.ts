@@ -129,7 +129,6 @@ return server;
 // --- EXPRESS SERVER ---
 const app = express();
 app.use(cors());
-app.use(express.json()); // Required to parse JSON bodies
 
 // Fake OAuth Endpoints
 app.get("/authorize", (req, res) => {
