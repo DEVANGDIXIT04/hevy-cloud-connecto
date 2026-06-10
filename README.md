@@ -66,14 +66,12 @@ To link this live server to your Claude app:
 
 ## 📸 Screenshots
 
-*(Highly Recommended for your Resume/Portfolio! Replace these placeholders with actual screenshots of your workflow)*
-
 <details>
 <summary>Click to view Screenshots</summary>
 
 ### 1. The Request in Claude
 *(Claude intelligently searching for exercise IDs and executing the MCP `create_routine` tool)*
-<img src="assets/screenshot1.png" width="700" />
+<img src="assets/screenshot3.png" width="700" />
 
 ### 2. The Hevy App Updating Live
 *(The official Hevy App instantly reflecting the newly created Chest Day routine)*
@@ -81,6 +79,6 @@ To link this live server to your Claude app:
 
 ### 3. Automated Routine Analysis
 *(Claude successfully analyzing past workouts and suggesting actionable improvements)*
-<img src="assets/screenshot3.png" width="700" />
+<img src="assets/screenshot1.png" width="700" />
 
 </details>
