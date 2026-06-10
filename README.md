@@ -33,7 +33,7 @@ I wanted a way to analyze my own workouts, track my progress over time, and get 
 3. **The Execution:** The AI then invokes the `update_routine` MCP tool with the correct payload and schema. The server translates this into an authenticated `PUT` request to Hevy's official servers.
 4. **The Result:** The user's routine is updated instantly in their Hevy app.
 
-## ⚙️ Setup & Deployment
+## ⚙️ Local Development Setup
 
 1. Clone the repository.
 2. Install dependencies: `npm install`
@@ -41,4 +41,46 @@ I wanted a way to analyze my own workouts, track my progress over time, and get 
 4. Build the project: `npm run build`
 5. Start the server: `npm start`
 
-To connect to Claude, expose the `/sse` endpoint and provide dummy OAuth credentials.
+## ☁️ Deployment (Render)
+
+This project is designed to be easily hosted on Render so it can run 24/7 without needing your PC.
+
+1. Create a new **Web Service** on Render and connect this GitHub repository.
+2. Set the Build Command to: `npm install && npm run build`
+3. Set the Start Command to: `npm start`
+4. In Environment Variables, add: `HEVY_API_KEY` (Your Hevy Developer API Key)
+5. Deploy! Your server will be live at `https://your-app-name.onrender.com`
+
+## 🤖 Connecting to Claude
+
+To link this live server to your Claude app:
+
+1. Open Claude and go to **Settings > Custom Connectors**.
+2. Create a new Connector.
+3. Provide the Base URL: `https://your-app-name.onrender.com`
+4. Because this server uses an OAuth-spoofing mechanism to bypass strict login flows:
+   - For **Authorization URL**, use: `https://your-app-name.onrender.com/authorize`
+   - For **Token URL**, use: `https://your-app-name.onrender.com/token`
+   - Enter any random string for the Client ID and Client Secret.
+5. Claude will seamlessly "authenticate" and establish an SSE connection to the server!
+
+## 📸 Screenshots
+
+*(Highly Recommended for your Resume/Portfolio! Replace these placeholders with actual screenshots of your workflow)*
+
+<details>
+<summary>Click to view Screenshots</summary>
+
+### 1. The Request in Claude
+*(Add a screenshot here showing you asking Claude to "Create a Chest Day Routine")*
+<!-- <img src="link_to_screenshot_1" width="300" /> -->
+
+### 2. The Hevy App Updating Live
+*(Add a screenshot here showing the Hevy App instantly reflecting the newly created routine)*
+<!-- <img src="link_to_screenshot_2" width="300" /> -->
+
+### 3. Automated Routine Analysis
+*(Add a screenshot showing Claude successfully analyzing your past workouts and suggesting improvements)*
+<!-- <img src="link_to_screenshot_3" width="300" /> -->
+
+</details>
