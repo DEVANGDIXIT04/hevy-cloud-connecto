@@ -4,6 +4,20 @@ A fully-featured [Model Context Protocol (MCP)](https://modelcontextprotocol.io/
 
 This project empowers AI models to natively read, create, update, and search your Hevy workout routines and exercise data through natural language commands, effectively acting as an intelligent personal trainer and data manager.
 
+## 📸 Screenshots
+
+### 1. The Request in Claude
+*(Claude intelligently searching for exercise IDs and executing the MCP `create_routine` tool)*
+<img src="assets/screenshot3.png" width="700" />
+
+### 2. The Hevy App Updating Live
+*(The official Hevy App instantly reflecting the newly created Chest Day routine)*
+<img src="assets/screenshot2.png" width="700" />
+
+### 3. Automated Routine Analysis
+*(Claude successfully analyzing past workouts and suggesting actionable improvements)*
+<img src="assets/screenshot1.png" width="700" />
+
 ## ✨ Features
 
 - **Read Live Data:** Fetch your recent workouts and saved routines instantly.
@@ -64,21 +78,3 @@ To link this live server to your Claude app:
    - Enter any random string for the Client ID and Client Secret.
 5. Claude will seamlessly "authenticate" and establish an SSE connection to the server!
 
-## 📸 Screenshots
-
-<details>
-<summary>Click to view Screenshots</summary>
-
-### 1. The Request in Claude
-*(Claude intelligently searching for exercise IDs and executing the MCP `create_routine` tool)*
-<img src="assets/screenshot3.png" width="700" />
-
-### 2. The Hevy App Updating Live
-*(The official Hevy App instantly reflecting the newly created Chest Day routine)*
-<img src="assets/screenshot2.png" width="700" />
-
-### 3. Automated Routine Analysis
-*(Claude successfully analyzing past workouts and suggesting actionable improvements)*
-<img src="assets/screenshot1.png" width="700" />
-
-</details>
