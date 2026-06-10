@@ -12,11 +12,11 @@ This project empowers AI models to natively read, create, update, and search you
 - **Cloud-Ready SSE Transport:** Built with a custom Express.js layer and Server-Sent Events (SSE) to bypass standard local MCP limitations. This allows the server to be hosted on cloud platforms (like Render or Vercel) and connected directly to a mobile AI client without needing a PC running 24/7.
 - **Bypass Authentication:** Includes a clever OAuth-bypass mechanism to seamlessly connect to Claude's strict Custom Connector authentication flow.
 
-## 🚀 Why I Built This (Resume Context)
+## 🚀 Why I Built This
 
-I built this project to explore the bleeding-edge of AI agent capabilities. Standard AI models are isolated, but by utilizing the Model Context Protocol, I successfully transformed an LLM into an active agent that can manipulate real-world data.
+The main reason I built this was to solve a personal pain point: **I was tired of manually taking screenshots of my daily workouts and sending them to an AI to get feedback.** 
 
-By reverse-engineering the authentication flows required by modern AI clients and building a custom SSE transport layer, I was able to decouple the AI agent from a local environment and create a persistent, cloud-hosted bridge between my mobile AI assistant and my Hevy workout data.
+I wanted a way to analyze my own workouts, track my progress over time, and get intelligent recommendations without the friction of manual data entry. By building this MCP server, I completely automated that pipeline. Now, my AI assistant has direct, real-time access to my Hevy workout history. It can instantly see what I did yesterday, analyze my volume, and recommend exactly what I should do today—all natively within the chat interface.
 
 ## 🛠️ Technology Stack
 
